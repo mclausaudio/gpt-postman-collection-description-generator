@@ -10,6 +10,8 @@ A few key takeaways:
 - Getting the prompt just right is tricky and takes lots of iteration, experimentation and tweaking.
 - Generating prompts consumes OpenAI Tokens, which you pay for.  This is something to be mindful of when using the OpenAI API.  It may be a good idea to include a token limit in the prompt generation if your collection has a lot of requests.
 
+Note: The prompting and generated text can still definitely use some tweaking and it isn't perfect, but I think the project shows the potential of using the OpenAI API to generate descriptions for Postman Collections.
+
 ## Quick Start
 
 1. Clone down the repo and `cd` into the root of the directory.
