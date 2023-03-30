@@ -3,9 +3,39 @@
 
 This script generates and updates a human-readable description for a Postman Collection using the OpenAI API, based on the collection ID provided as a command-line argument.
 
+How it works is you provide a Postman Collection ID as a command-line argument, and the script will use the Postman API to retrieve the collection's name and the names of all of its folders and requests.  It takes into account each requests name, endpoint, HTTP Method, and any pre-reqeuest script, post-request test script, and description if they are included. It will then use the OpenAI API to generate a description for the collection based on the collection name and the names of all of its folders and requests. The script will then ask you whether you want to update the existing description in Postman or not. Type \`Y\` to update the description or \`N\` to exit without updating.
+
+## Quick Start
+ 
+1. Clone down the repo and `cd` into the root of the directory.
+2. Run `npm install`.  
+3. Add a `.env` file containing values for `POSTMAN_API_KEY=your_key` `OPENAI_API_KEY=your_key` and `OPENAI_ORGANIZATION_ID=your_org-id` (you can get these from your Postman and OpenAI accounts).
+4. Run `node main.js <collection_id>` where `<collection_id>` is the ID of the Postman collection you want to generate a description for.
+
 ## Example
 
 ### Demo #1
+
+[Instagram Collection]('https://www.postman.com/meta/workspace/instagram/collection/23987686-9386f468-7714-490f-9bfc-9442db5c8f00?ctx=documentation') (I forked the collection and cleared the description so it would generate a new one): 
+<img src="README/ig-collection-wo-description.png">
+<img src="README/ig-collection-terminal.png">
+<img src="README/ig-collection-w-description.png">
+If a description already exists for the collection, it will generate a new one and ask if you want to overwrite the existing description.
+<img src="README/ig-collection-terminal-overwrite.png">
+
+### Demo #2
+
+[JSONPlaceholder]('https://jsonplaceholder.typicode.com/') Collection (I created this collection and added some requests to it):
+<img src="README/jsonplaceholder-collection-wo-description.png">
+<img src="README/jsonplaceholder-collection-terminal.png">
+<img src="README/jsonplaceholder-collection-w-description.png">
+
+### Demo #3
+
+[Notion Collection]('https://www.postman.com/notionhq/workspace/notion-s-api-workspace/collection/15568543-d990f9b7-98d3-47d3-9131-4866ab9c6df2?ctx=documentation') (I forked the collection and cleared the description so it would generate a new one):
+<img src="README/notion-collection-wo-description.png">
+<img src="README/notion-collection-terminal.png">
+<img src="README/notion-collection-w-description.png">
 
 
 ## Prerequisites

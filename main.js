@@ -93,15 +93,17 @@ async function main() {
     const collectionName = collection.info.name;
 
     let requestSummaries = [];
-    const numberOfRequests = collection.item.length;
-    for (const item of collection.item) {
 
+    const processRequest = (item) => {
       const name = item.name;
       const request = item.request;
       const method = request.method;
       const url = request.url.raw;
+      const itemDescription = item.description ? item.description.content : null;
+    
       let testScript = null;
       let preRequestScript = null;
+      
       if (item.event && item.event.length > 0) {
         for (const event of item.event) {
           if (event.listen === 'test') {
@@ -112,8 +114,29 @@ async function main() {
           }
         }
       }
+    
+      requestSummaries.push(`
+        ${method} request to ${url}.  This request is named "${name}".
+        ${itemDescription ? `  It contains the following description, just for context: "${reqDescriptiom}".` : ``}
+        ${testScript ? `  It contains the following code it's Postman Test Script, just for context: "${testScript}".` : ``}
+        ${preRequestScript ? `  It contains the following code it's Postman Pre-Request Script, just for context: "${preRequestScript}".` : ``}
+      `);
+    }
 
-      requestSummaries.push(`${method} request to ${url}.  This request is named "${name}".${testScript ? `  It contains the following code it's Postman Test Script, just for context: "${testScript}".` : ``}${preRequestScript ? `  It contains the following code it's Postman Pre-Request Script, just for context: "${preRequestScript}".` : ``}`);
+    let numberOfRequests = 0;
+        
+    for (const item of collection.item) {
+      if (item.item) {
+        // The item is a folder
+        numberOfRequests += item.item.length;
+        for (const requestItem of item.item) {
+          processRequest(requestItem);
+        }
+      } else {
+        numberOfRequests += collection.length;
+        // The item is a request
+        processRequest(item);
+      }
     }
 
     const joinedRequestSummaries = requestSummaries.join(', ');
