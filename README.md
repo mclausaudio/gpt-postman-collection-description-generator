@@ -35,11 +35,11 @@ Note: If a description already exists for the collection, it will generate a new
 
 [JSONPlaceholder]('https://jsonplaceholder.typicode.com/') Collection (I created this collection and added some requests to it).
 Before:
-<img src="README/jsonplaceholder-collection-wo-description.png">
+<img src="README/JSONPlaceholder-collection-wo-description.png">
 During:
-<img src="README/jsonplaceholder-collection-terminal.png">
+<img src="README/JSONPlaceholder-collection-terminal.png">
 After:
-<img src="README/jsonplaceholder-collection-w-description.png">
+<img src="README/JSONPlaceholder-collection-w-description.png">
 
 ### Demo #3
 
